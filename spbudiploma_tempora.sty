@@ -21,11 +21,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
+\addto\captionsrussian{\renewcommand{\contentsname}{СОДЕРЖАНИЕ}}
 \renewcommand{\rmdefault}{Tempora-TLF}
 
 % Межстрочный интервал = 1.5pt
 \usepackage{setspace}
 \onehalfspacing
+
+\usepackage{caption}
+
+\DeclareCaptionLabelSeparator{dash}{ - }
+\captionsetup{labelsep=dash, labelfont=normalfont}
+
+\usepackage[figurename=Рисунок]{caption}
 
 % Абзацный отступ = 1.25см
 \usepackage{indentfirst}
@@ -37,22 +45,26 @@
 % Команда для специальных разделов (введение, обзор литературы, etc)
 % Не нумеруются в содержании, по уровню вложенности: 
 \newcommand{\specialsection}[1]{
+    \begin{center}
     \phantomsection
     \bigskip\smallskip\hspace{-13.8mm}
     \normalfont\fontsize{18}{18}\textbf{#1}
     \par\bigskip\normalfont\normalsize
     \addcontentsline{toc}{section}{#1}
+    \end{center}
 }
+
+\newcommand{\specialsubsection}[1]{\paragraph{#1}\mbox{}\\}
 
 % Размеры заголовков разделов и подразделов
 \usepackage{titlesec}
 % Раздел: 18pt, добавляем слово "Глава"
 \titleformat{\section}
-{\fontsize{18}{18}\bfseries}{
+{\fontsize{18}{18}\bfseries\filcenter}{
 \hspace{-1.5mm}Глава \thesection. \hskip-1em}{1em}{}
 % Подраздел: 16pt
 \titleformat{\subsection}
-{\fontsize{16}{16}\bfseries}{\hspace{-0.2mm}\thesubsection}{1em}{}
+{\fontsize{16}{16}\bfseries\filcenter}{\hspace{-0.2mm}\thesubsection. \hskip-1em}{1em}{}
 
 % Сожержание
 % Выравнивание заголовка по центру (да, да, хак с отступом слева \hspace{0.31\textwidth})
@@ -79,7 +91,7 @@
 
 % Шрифт подписи (caption) = 12pt
 % (Повезло, что small как раз равен 12pt)
-\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[font=small,labelfont=normalfont]{caption}
 
 % Пакет, который позволяет собирать один документ TeX из нескольких
 \usepackage{import}
@@ -97,8 +109,8 @@
 % Список литературы
 \renewenvironment{thebibliography}[1]
     {\bigskip
-    {\centering\large\bf Список литературы\par}%
-    \addcontentsline{toc}{section}{Список литературы}
+    {\centering\large\bf Список использованных источников\par}%
+    \addcontentsline{toc}{section}{Список использованных источников}
     \smallskip
     \list{\@biblabel{\@arabic\c@enumiv}}%
         {\settowidth\labelwidth{\@biblabel{#1}}%
